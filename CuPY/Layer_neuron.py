@@ -1,17 +1,19 @@
 import timeit
 
 start = timeit.default_timer()
-import numpy as np
+import cupy as cp
 import random
-
+import numpy as np
 inputs=[random.randint(0,9),random.randint(0,9),random.randint(0,9),random.randint(0,9)]
 weights=[[random.random(),random.random(),random.random(),random.random()],
          [random.random(),random.random(),random.random(),random.random()],
          [random.random(),random.random(),random.random(),random.random()]]
 
 biases=[random.randint(0,9),random.randint(0,9),random.randint(0,9)]
-
-layer_outputs=np.dot(weights,inputs)+biases
+inputs=np.array(inputs)
+weights=np.array(weights)
+biases=np.array(biases)
+layer_outputs=cp.dot(weights,inputs,out=None)+biases
 print(layer_outputs)
 
 
